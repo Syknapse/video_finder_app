@@ -1,11 +1,14 @@
 # Video Finder App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## To run the project
 
 Run `npm install`
 
-Then `npm start` for local development
+Then `npm run start` for local development
 
 `npm run build` to build production bundle
+
+## To deploy and publish the app
+
+Run `npm run deploy`  
+This will first create an optimised build bundle then deploy it to GitHub Pages where it would go live on the [production website](https://syknapse.github.io/video_finder_app/)
