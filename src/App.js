@@ -1,7 +1,7 @@
-import "./App.css";
+import './App.css'
 
 function App() {
-  return <div className="App">Video Finder App</div>;
+  return <div className="App">Video Finder App</div>
 }
 
-export default App;
+export default App
