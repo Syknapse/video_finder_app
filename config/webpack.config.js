@@ -1,5 +1,3 @@
-'use strict'
-
 const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
@@ -315,6 +313,9 @@ module.exports = function (webpackEnv) {
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         ...(modules.webpackAliases || {}),
+        '@components': path.resolve(__dirname, '../src/components'),
+        '@pages': path.resolve(__dirname, '../src/pages'),
+        '@api': path.resolve(__dirname, '../src/api'),
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
