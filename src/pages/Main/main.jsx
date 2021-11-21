@@ -8,10 +8,13 @@ const Main = () => {
   const [displayVideos, setDisplayVideos] = useState([])
   const [currentVid, setCurrentVid] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [value, setValue] = useState('')
+  const [values, setValues] = useState({
+    query: '',
+    numberOfVideos: 10,
+  })
   const vidEl = useRef(null)
 
-  const getData = async (query, perPage) => {
+  const getData = async ({ query, perPage }) => {
     setIsLoading(true)
     try {
       const response = await Api.getVideos({ query, perPage })
@@ -34,8 +37,9 @@ const Main = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (!value) return
-    getData(value, 10)
+    const { query, numberOfVideos } = values
+    if (!query) return
+    getData({ query, perPage: numberOfVideos })
   }
 
   const handleEnded = () => {
@@ -44,7 +48,13 @@ const Main = () => {
 
   return (
     <main>
-      <Search handleSubmit={handleSubmit} value={value} handleChange={e => setValue(e.target.value)} />
+      <Search
+        handleSubmit={handleSubmit}
+        query={values.query}
+        numberOfVideos={values.numberOfVideos}
+        handleSearchChange={e => setValues({ ...values, query: e.target.value })}
+        handleNumChange={e => setValues({ ...values, numberOfVideos: e.target.value })}
+      />
       <Player video={currentVid} onEnded={() => handleEnded()} vidEl={vidEl} isLoading={isLoading} />
     </main>
   )
