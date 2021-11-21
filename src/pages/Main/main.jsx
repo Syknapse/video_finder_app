@@ -6,12 +6,21 @@ const Main = ({ title }) => {
   const query = 'Tiger'
   const [displayVideos, setDisplayVideos] = useState([])
   const [currentVid, setCurrentVid] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const vidEl = useRef(null)
 
   useEffect(() => {
     const getData = async () => {
-      const response = await Api.getVideos({ query, perPage: 8 })
-      setDisplayVideos(response.videos)
+      setIsLoading(true)
+      try {
+        const response = await Api.getVideos({ query, perPage: 8 })
+        setDisplayVideos(response.videos)
+      } catch (e) {
+        window.alert(e)
+        console.error(e)
+      } finally {
+        setIsLoading(false)
+      }
     }
     getData()
   }, [])
@@ -28,7 +37,7 @@ const Main = ({ title }) => {
   return (
     <div>
       <h2>{title}</h2>
-      <Player video={currentVid} onEnded={() => handleEnded()} vidEl={vidEl} />
+      <Player video={currentVid} onEnded={() => handleEnded()} vidEl={vidEl} isLoading={isLoading} />
     </div>
   )
 }

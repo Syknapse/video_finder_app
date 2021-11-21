@@ -6,6 +6,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body,
+body * {
+  box-sizing: border-box;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Keyboard accessibility and patch for browsers that don't support :focus-visible */
+*:focus {
+  outline: 2px auto -webkit-focus-ring-color;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline-color: black;
+  outline-color: -webkit-focus-ring-color;
+  outline-style: solid;
+  outline-width: 2px;
 }
