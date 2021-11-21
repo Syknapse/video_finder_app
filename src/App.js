@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       Video Finder App
-      <Main title="Imperial tigress" />
+      <Main />
     </div>
   )
 }
