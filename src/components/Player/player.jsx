@@ -1,6 +1,6 @@
 import './player.css'
 
-const Player = ({ video, onEnded, vidEl, isLoading }) => {
+const Player = ({ video, onEnded, vidEl, isLoading, hasResults }) => {
   const hasVideo = video && Object.keys(video).length !== 0
 
   return (
@@ -24,7 +24,9 @@ const Player = ({ video, onEnded, vidEl, isLoading }) => {
             </p>
           </video>
           <div className="overlay">
-            <a href={video.user?.url}>{video.user?.name}</a>
+            <a href={video.user?.url} target="_blank" rel="noreferrer">
+              {video.user?.name}
+            </a>
           </div>
         </>
       )}
@@ -33,6 +35,9 @@ const Player = ({ video, onEnded, vidEl, isLoading }) => {
           <div className="loader_text">loading ....</div>
           <div className="loader_element"></div>
         </div>
+      )}
+      {!hasResults && (
+        <div className="loader">Sorry, there are no results for this search term. Try another search</div>
       )}
     </div>
   )

@@ -7,6 +7,7 @@ import './main.css'
 const Main = () => {
   const vidEl = useRef(null)
   const [displayVideos, setDisplayVideos] = useState([])
+  const [hasResults, setHasResults] = useState(true)
   const [currentVid, setCurrentVid] = useState(null)
   const [vidIndex, setVidIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
@@ -26,8 +27,10 @@ const Main = () => {
   const getData = async ({ query, perPage }) => {
     setIsLoading(true)
     try {
-      const response = await Api.getVideos({ query, perPage })
-      setDisplayVideos(response.videos)
+      const { videos, total_results } = await Api.getVideos({ query, perPage })
+      setDisplayVideos(videos)
+      if (total_results < values.numberOfVideos) setValues({ ...values, numberOfVideos: total_results })
+      setHasResults(total_results !== 0)
     } catch (e) {
       window.alert(e)
       console.error(e)
@@ -45,16 +48,28 @@ const Main = () => {
     getData({ query, perPage: numberOfVideos })
   }
 
+  const handleSearchChange = e => {
+    values.numberOfVideos === 0
+      ? setValues({ query: e.target.value, numberOfVideos: 10 })
+      : setValues({ ...values, query: e.target.value })
+  }
+
   return (
     <main>
       <Search
         handleSubmit={handleSubmit}
         query={values.query}
         numberOfVideos={values.numberOfVideos}
-        handleSearchChange={e => setValues({ ...values, query: e.target.value })}
+        handleSearchChange={handleSearchChange}
         handleNumChange={e => setValues({ ...values, numberOfVideos: e.target.value })}
       />
-      <Player video={currentVid} onEnded={() => getNextVideo()} vidEl={vidEl} isLoading={isLoading} />
+      <Player
+        video={currentVid}
+        onEnded={() => getNextVideo()}
+        vidEl={vidEl}
+        isLoading={isLoading}
+        hasResults={hasResults}
+      />
     </main>
   )
 }

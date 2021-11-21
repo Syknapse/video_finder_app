@@ -15,6 +15,9 @@ const Search = ({ handleSubmit, query, numberOfVideos, handleSearchChange, handl
       <fieldset>
         <label>Number of videos to play</label>
         <select onChange={handleNumChange} value={numberOfVideos}>
+          <option key={0} value={0} disabled>
+            0
+          </option>
           {Array.from(Array(10).keys()).map(i => {
             const value = i + 1
             return (
