@@ -6,22 +6,27 @@ const Player = ({ video, onEnded, vidEl, isLoading }) => {
   return (
     <div className="player">
       {hasVideo && (
-        <video
-          ref={vidEl}
-          onEnded={onEnded}
-          controls
-          muted
-          autoPlay
-          poster={video.video_pictures[0].picture}
-          height="500px"
-        >
-          {video.video_files.map(videoFile => (
-            <source key={videoFile.id} src={videoFile.link} type={videoFile.file_type} />
-          ))}
-          <p>
-            Your browser doesn't support HTML5 video. Here is a <a href={video.url}>link to the video</a> instead.
-          </p>
-        </video>
+        <>
+          <video
+            ref={vidEl}
+            onEnded={onEnded}
+            controls
+            muted
+            autoPlay
+            poster={video.video_pictures[0].picture}
+            height="500px"
+          >
+            {video.video_files.map(videoFile => (
+              <source key={videoFile.id} src={videoFile.link} type={videoFile.file_type} />
+            ))}
+            <p>
+              Your browser doesn't support HTML5 video. Here is a <a href={video.url}>link to the video</a> instead.
+            </p>
+          </video>
+          <div className="overlay">
+            <a href={video.user?.url}>{video.user?.name}</a>
+          </div>
+        </>
       )}
       {isLoading && (
         <div className="loader">
