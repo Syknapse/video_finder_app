@@ -14,6 +14,7 @@ const Main = () => {
   const [values, setValues] = useState({
     query: '',
     numberOfVideos: 10,
+    time: 10,
   })
 
   useEffect(() => {
@@ -49,9 +50,14 @@ const Main = () => {
   }
 
   const handleSearchChange = e => {
+    // If the previous search yielded zero results we need to reset the count to default
     values.numberOfVideos === 0
       ? setValues({ query: e.target.value, numberOfVideos: 10 })
       : setValues({ ...values, query: e.target.value })
+  }
+
+  const handleTime = () => {
+    if (vidEl.current.currentTime > values.time) getNextVideo()
   }
 
   return (
@@ -60,12 +66,16 @@ const Main = () => {
         handleSubmit={handleSubmit}
         query={values.query}
         numberOfVideos={values.numberOfVideos}
+        time={values.time}
         handleSearchChange={handleSearchChange}
         handleNumChange={e => setValues({ ...values, numberOfVideos: e.target.value })}
+        handleTimeChange={e => setValues({ ...values, time: e.target.value })}
+        isLoading={isLoading}
       />
       <Player
         video={currentVid}
         onEnded={() => getNextVideo()}
+        onTimeUpdate={() => handleTime()}
         vidEl={vidEl}
         isLoading={isLoading}
         hasResults={hasResults}

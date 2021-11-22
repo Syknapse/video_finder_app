@@ -1,9 +1,18 @@
 import './search.css'
 
-const Search = ({ handleSubmit, query, numberOfVideos, handleSearchChange, handleNumChange, isLoading }) => {
+const Search = ({
+  handleSubmit,
+  query,
+  numberOfVideos,
+  time,
+  handleSearchChange,
+  handleNumChange,
+  handleTimeChange,
+  isLoading,
+}) => {
   return (
     <form className="search" onSubmit={handleSubmit}>
-      <fieldset>
+      <fieldset disabled={isLoading}>
         <input
           type="search"
           value={query}
@@ -12,7 +21,7 @@ const Search = ({ handleSubmit, query, numberOfVideos, handleSearchChange, handl
         />
         <input type="submit" value="Submit" />
       </fieldset>
-      <fieldset>
+      <fieldset disabled={isLoading}>
         <label>Number of videos to play</label>
         <select onChange={handleNumChange} value={numberOfVideos}>
           <option key={0} value={0} disabled>
@@ -26,6 +35,14 @@ const Search = ({ handleSubmit, query, numberOfVideos, handleSearchChange, handl
               </option>
             )
           })}
+        </select>
+      </fieldset>
+      <fieldset disabled={isLoading}>
+        <label>Each video plays for up to</label>
+        <select onChange={handleTimeChange} value={time}>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={30}>30</option>
         </select>
       </fieldset>
     </form>

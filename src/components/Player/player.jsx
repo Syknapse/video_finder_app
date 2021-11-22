@@ -1,6 +1,6 @@
 import './player.css'
 
-const Player = ({ video, onEnded, vidEl, isLoading, hasResults }) => {
+const Player = ({ video, onEnded, onTimeUpdate, vidEl, isLoading, hasResults }) => {
   const hasVideo = video && Object.keys(video).length !== 0
 
   return (
@@ -10,6 +10,7 @@ const Player = ({ video, onEnded, vidEl, isLoading, hasResults }) => {
           <video
             ref={vidEl}
             onEnded={onEnded}
+            onTimeUpdate={onTimeUpdate}
             controls
             muted
             autoPlay
