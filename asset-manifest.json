@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/video_finder_app/static/css/main.106baaae.chunk.css",
-    "main.js": "/video_finder_app/static/js/main.f7ccd5b7.chunk.js",
-    "main.js.map": "/video_finder_app/static/js/main.f7ccd5b7.chunk.js.map",
+    "main.css": "/video_finder_app/static/css/main.918c1049.chunk.css",
+    "main.js": "/video_finder_app/static/js/main.944bea3e.chunk.js",
+    "main.js.map": "/video_finder_app/static/js/main.944bea3e.chunk.js.map",
     "runtime-main.js": "/video_finder_app/static/js/runtime-main.a8d7f8ef.js",
     "runtime-main.js.map": "/video_finder_app/static/js/runtime-main.a8d7f8ef.js.map",
-    "static/js/2.e87eb02f.chunk.js": "/video_finder_app/static/js/2.e87eb02f.chunk.js",
-    "static/js/2.e87eb02f.chunk.js.map": "/video_finder_app/static/js/2.e87eb02f.chunk.js.map",
+    "static/js/2.6aed69c2.chunk.js": "/video_finder_app/static/js/2.6aed69c2.chunk.js",
+    "static/js/2.6aed69c2.chunk.js.map": "/video_finder_app/static/js/2.6aed69c2.chunk.js.map",
     "index.html": "/video_finder_app/index.html",
-    "static/css/main.106baaae.chunk.css.map": "/video_finder_app/static/css/main.106baaae.chunk.css.map",
-    "static/js/2.e87eb02f.chunk.js.LICENSE.txt": "/video_finder_app/static/js/2.e87eb02f.chunk.js.LICENSE.txt"
+    "static/css/main.918c1049.chunk.css.map": "/video_finder_app/static/css/main.918c1049.chunk.css.map",
+    "static/js/2.6aed69c2.chunk.js.LICENSE.txt": "/video_finder_app/static/js/2.6aed69c2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a8d7f8ef.js",
-    "static/js/2.e87eb02f.chunk.js",
-    "static/css/main.106baaae.chunk.css",
-    "static/js/main.f7ccd5b7.chunk.js"
+    "static/js/2.6aed69c2.chunk.js",
+    "static/css/main.918c1049.chunk.css",
+    "static/js/main.944bea3e.chunk.js"
   ]
 }
