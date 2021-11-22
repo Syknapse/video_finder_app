@@ -22,9 +22,8 @@ const Main = () => {
     count: COUNT,
     time: TIME,
   })
-  const [errors, setErrors] = useState({
-    hasResults: true,
-    hasFailed: false,
+  const [error, setError] = useState({
+    hasError: false,
     message: '',
   })
 
@@ -42,9 +41,9 @@ const Main = () => {
       const { videos, total_results } = await Api.getVideos({ query, perPage })
       setDisplayVideos(videos)
       if (total_results < values.count) setValues({ ...values, count: total_results })
-      setErrors({ ...errors, hasResults: total_results !== NO_RESULTS })
+      setError({ hasError: total_results === NO_RESULTS, message: '' })
     } catch (e) {
-      setErrors({ ...errors, hasFailed: true, message: e.message })
+      setError({ hasError: true, message: e.message })
       console.error(e)
     } finally {
       setIsLoading(false)
@@ -57,6 +56,10 @@ const Main = () => {
     e.preventDefault()
     const { query, count } = values
     if (!query) return
+    // Reset
+    setError({ hasError: false, message: '' })
+    setDisplayVideos([])
+
     getData({ query, perPage: count })
   }
 
@@ -89,7 +92,7 @@ const Main = () => {
         onTimeUpdate={() => handleTime()}
         vidEl={vidEl}
         isLoading={isLoading}
-        errors={errors}
+        error={error}
       />
     </main>
   )

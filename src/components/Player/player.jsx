@@ -1,10 +1,13 @@
+import clsx from 'clsx'
+import { Loader } from './components'
+import { ErrorModule } from './components'
 import './player.css'
 
-const Player = ({ video, onEnded, onTimeUpdate, vidEl, isLoading, errors }) => {
+const Player = ({ video, onEnded, onTimeUpdate, vidEl, isLoading, error }) => {
   const hasVideo = video && Object.keys(video).length !== 0
 
   return (
-    <div className="player">
+    <div className={clsx('player', !hasVideo && 'empty')}>
       {hasVideo && (
         <>
           <video
@@ -31,16 +34,8 @@ const Player = ({ video, onEnded, onTimeUpdate, vidEl, isLoading, errors }) => {
           </div>
         </>
       )}
-      {isLoading && (
-        <div className="overlay">
-          <div className="loader_text">loading ....</div>
-          <div className="loader_element"></div>
-        </div>
-      )}
-      {!errors.hasResults && (
-        <div className="overlay">Sorry, there are no results for this search term. Try another search</div>
-      )}
-      {errors.hasFailed && <div className="overlay">{errors.message}</div>}
+      {isLoading && <Loader className="overlay" />}
+      {error.hasError && <ErrorModule className="overlay" message={error.message} />}
     </div>
   )
 }
