@@ -1,6 +1,6 @@
 import './player.css'
 
-const Player = ({ video, onEnded, onTimeUpdate, vidEl, isLoading, hasResults }) => {
+const Player = ({ video, onEnded, onTimeUpdate, vidEl, isLoading, errors }) => {
   const hasVideo = video && Object.keys(video).length !== 0
 
   return (
@@ -24,7 +24,7 @@ const Player = ({ video, onEnded, onTimeUpdate, vidEl, isLoading, hasResults }) 
               Your browser doesn't support HTML5 video. Here is a <a href={video.url}>link to the video</a> instead.
             </p>
           </video>
-          <div className="overlay">
+          <div className="caption">
             <a href={video.user?.url} target="_blank" rel="noreferrer">
               {video.user?.name}
             </a>
@@ -32,14 +32,15 @@ const Player = ({ video, onEnded, onTimeUpdate, vidEl, isLoading, hasResults }) 
         </>
       )}
       {isLoading && (
-        <div className="loader">
+        <div className="overlay">
           <div className="loader_text">loading ....</div>
           <div className="loader_element"></div>
         </div>
       )}
-      {!hasResults && (
-        <div className="loader">Sorry, there are no results for this search term. Try another search</div>
+      {!errors.hasResults && (
+        <div className="overlay">Sorry, there are no results for this search term. Try another search</div>
       )}
+      {errors.hasFailed && <div className="overlay">{errors.message}</div>}
     </div>
   )
 }

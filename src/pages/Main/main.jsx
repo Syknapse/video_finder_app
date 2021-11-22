@@ -4,17 +4,28 @@ import { Search } from '@components'
 import { Player } from '@components'
 import './main.css'
 
+const DEFAULTS = {
+  COUNT: 10,
+  TIME: 10,
+  NO_RESULTS: 0,
+}
+
 const Main = () => {
+  const { COUNT, TIME, NO_RESULTS } = DEFAULTS
   const vidEl = useRef(null)
   const [displayVideos, setDisplayVideos] = useState([])
-  const [hasResults, setHasResults] = useState(true)
   const [currentVid, setCurrentVid] = useState(null)
   const [vidIndex, setVidIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [values, setValues] = useState({
     query: '',
-    numberOfVideos: 10,
-    time: 10,
+    count: COUNT,
+    time: TIME,
+  })
+  const [errors, setErrors] = useState({
+    hasResults: true,
+    hasFailed: false,
+    message: '',
   })
 
   useEffect(() => {
@@ -30,10 +41,10 @@ const Main = () => {
     try {
       const { videos, total_results } = await Api.getVideos({ query, perPage })
       setDisplayVideos(videos)
-      if (total_results < values.numberOfVideos) setValues({ ...values, numberOfVideos: total_results })
-      setHasResults(total_results !== 0)
+      if (total_results < values.count) setValues({ ...values, count: total_results })
+      setErrors({ ...errors, hasResults: total_results !== NO_RESULTS })
     } catch (e) {
-      window.alert(e)
+      setErrors({ ...errors, hasFailed: true, message: e.message })
       console.error(e)
     } finally {
       setIsLoading(false)
@@ -44,15 +55,15 @@ const Main = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    const { query, numberOfVideos } = values
+    const { query, count } = values
     if (!query) return
-    getData({ query, perPage: numberOfVideos })
+    getData({ query, perPage: count })
   }
 
   const handleSearchChange = e => {
     // If the previous search yielded zero results we need to reset the count to default
-    values.numberOfVideos === 0
-      ? setValues({ query: e.target.value, numberOfVideos: 10 })
+    values.count === NO_RESULTS
+      ? setValues({ ...values, query: e.target.value, count: COUNT })
       : setValues({ ...values, query: e.target.value })
   }
 
@@ -65,10 +76,10 @@ const Main = () => {
       <Search
         handleSubmit={handleSubmit}
         query={values.query}
-        numberOfVideos={values.numberOfVideos}
+        count={values.count}
         time={values.time}
         handleSearchChange={handleSearchChange}
-        handleNumChange={e => setValues({ ...values, numberOfVideos: e.target.value })}
+        handleCountChange={e => setValues({ ...values, count: e.target.value })}
         handleTimeChange={e => setValues({ ...values, time: e.target.value })}
         isLoading={isLoading}
       />
@@ -78,7 +89,7 @@ const Main = () => {
         onTimeUpdate={() => handleTime()}
         vidEl={vidEl}
         isLoading={isLoading}
-        hasResults={hasResults}
+        errors={errors}
       />
     </main>
   )

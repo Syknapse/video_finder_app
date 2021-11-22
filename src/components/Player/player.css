@@ -7,7 +7,7 @@
   background-color: black;
 }
 
-.overlay {
+.caption {
   position: absolute;
   bottom: 100px;
   left: 50%;
@@ -22,7 +22,7 @@
   background: rgb(128 128 128 / 50%);
 }
 
-.loader {
+.overlay {
   position: absolute;
   top: 0;
   bottom: 0;

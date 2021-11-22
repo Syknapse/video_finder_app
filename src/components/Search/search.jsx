@@ -3,10 +3,10 @@ import './search.css'
 const Search = ({
   handleSubmit,
   query,
-  numberOfVideos,
+  count,
   time,
   handleSearchChange,
-  handleNumChange,
+  handleCountChange,
   handleTimeChange,
   isLoading,
 }) => {
@@ -23,7 +23,7 @@ const Search = ({
       </fieldset>
       <fieldset disabled={isLoading}>
         <label>Number of videos to play</label>
-        <select onChange={handleNumChange} value={numberOfVideos}>
+        <select onChange={handleCountChange} value={count}>
           <option key={0} value={0} disabled>
             0
           </option>
@@ -40,9 +40,9 @@ const Search = ({
       <fieldset disabled={isLoading}>
         <label>Each video plays for up to</label>
         <select onChange={handleTimeChange} value={time}>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={30}>30</option>
+          <option value={10}>10s</option>
+          <option value={20}>20s</option>
+          <option value={30}>30s</option>
         </select>
       </fieldset>
     </form>
