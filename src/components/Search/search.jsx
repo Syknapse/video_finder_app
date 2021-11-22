@@ -11,15 +11,21 @@ const Search = ({
   isLoading,
 }) => {
   return (
-    <form className="search" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <fieldset disabled={isLoading}>
         <input
+          className="search"
           type="search"
           value={query}
-          placeholder="Search videos ex: tiger, beach..."
+          placeholder="Search videos"
           onChange={handleSearchChange}
         />
-        <input type="submit" value="Submit" />
+        <input
+          className="submit"
+          type="submit"
+          value="Submit"
+          title={query ? `Click to search for ${count} ${query} videos playing each for ${time}s` : undefined}
+        />
       </fieldset>
       <fieldset disabled={isLoading}>
         <label>Number of videos to play</label>

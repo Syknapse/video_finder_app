@@ -12,8 +12,14 @@ body * {
   box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+h1 {
+  text-align: center;
+}
+
+input,
+button,
+select {
+  border-radius: 6px;
 }
 
 /* Keyboard accessibility and patch for browsers that don't support :focus-visible */

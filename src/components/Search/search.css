@@ -1,4 +1,44 @@
+.form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  margin: auto;
+}
+
+.form fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
 .search {
-  width: 18.75rem;
-  margin: 0 1rem 1rem 0;
+  width: 100%;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+.submit {
+  font-weight: bold;
+  width: 8rem;
+  height: 2rem;
+  margin: 1rem auto;
+}
+
+.form select {
+  width: 80%;
+  height: 1.5rem;
+  margin-top: 1rem;
+}
+
+@media screen and (min-width: 1280px) {
+  .form {
+    flex-direction: column;
+    justify-content: unset;
+    flex-wrap: unset;
+    width: 18.75rem;
+    margin: 0 1rem 1rem 0;
+  }
 }
