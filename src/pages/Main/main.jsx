@@ -77,14 +77,14 @@ const Main = () => {
   return (
     <main>
       <Search
-        handleSubmit={handleSubmit}
         query={values.query}
         count={values.count}
         time={values.time}
+        isLoading={isLoading}
+        handleSubmit={handleSubmit}
         handleSearchChange={handleSearchChange}
         handleCountChange={e => setValues({ ...values, count: e.target.value })}
         handleTimeChange={e => setValues({ ...values, time: e.target.value })}
-        isLoading={isLoading}
       />
       <Player
         video={currentVid}

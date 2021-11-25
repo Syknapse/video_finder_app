@@ -1,15 +1,27 @@
+import React from 'react'
 import './search.css'
 
+interface searchInterface {
+  query: string
+  count: number
+  time: number
+  isLoading: boolean
+  handleSubmit: React.FormEventHandler<HTMLFormElement>
+  handleSearchChange: React.ChangeEventHandler<HTMLInputElement>
+  handleCountChange: React.ChangeEventHandler<HTMLSelectElement>
+  handleTimeChange: React.ChangeEventHandler<HTMLSelectElement>
+}
+
 const Search = ({
-  handleSubmit,
   query,
   count,
   time,
+  isLoading,
+  handleSubmit,
   handleSearchChange,
   handleCountChange,
   handleTimeChange,
-  isLoading,
-}) => {
+}: searchInterface): JSX.Element => {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <fieldset disabled={isLoading}>
